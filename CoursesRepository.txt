@@ -1,0 +1,139 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Contoso.Models;
+using System.Data;
+using System.Data.SqlClient;
+
+namespace Contoso.Data
+{
+    public class CoursesRepository:IRepository<Courses>
+    {
+
+        public void Add(Courses entity)
+        {
+            using (SqlConnection conn = new SqlConnection(DB_Helper.GetConnection()))
+            {
+                conn.Open();
+
+                SqlCommand com = new SqlCommand();
+                com.CommandText = "proc_Courses_Add";
+                com.CommandType = CommandType.StoredProcedure;
+                com.Connection = conn;
+
+                com.Parameters.AddWithValue("@Title", entity.Title);
+                com.Parameters.AddWithValue("@Credits", entity.Credits);
+                com.Parameters.AddWithValue("@DepartmentID", entity.DepartmentID);
+                com.Parameters.AddWithValue("@CreatedDate", entity.CreatedDate);
+                com.Parameters.AddWithValue("@CreatedBy", entity.CreatedBy);
+                com.Parameters.AddWithValue("@UpdatedDate", entity.UpdatedDate);
+                com.Parameters.AddWithValue("@UpdatedBy", entity.UpdatedBy);
+
+                com.ExecuteNonQuery();
+            }
+        }
+
+        public Courses PrintOne(int id)
+        {
+            using (SqlConnection conn = new SqlConnection(DB_Helper.GetConnection()))
+            {
+                conn.Open();
+
+                SqlCommand com = new SqlCommand();
+                com.CommandText = "proc_Courses_PrintOne";
+                com.CommandType = CommandType.StoredProcedure;
+                com.Connection = conn;
+
+                com.Parameters.AddWithValue("ID", id);
+                SqlDataReader reader = com.ExecuteReader();
+                Courses courses = new Courses();
+
+                while (reader.Read())
+                {
+                    courses.ID = Convert.ToInt32(reader["ID"]);
+                    courses.Title = reader["Title"].ToString();
+                    courses.Credits = Convert.ToInt32(reader["Credits"]);
+                    courses.DepartmentID = Convert.ToInt32(reader["DepartmentID"]);
+                    courses.CreatedDate = Convert.ToDateTime(reader["CreatedDate"]);
+                    courses.CreatedBy = reader["CreatedBy"].ToString();
+                    courses.UpdatedDate = Convert.ToDateTime(reader["UpdatedDate"]);
+                    courses.UpdatedBy = reader["UpdatedBy"].ToString();
+                }
+                return courses;
+            }
+        }
+
+        public List<Courses> PrintAll()
+        {
+            using (SqlConnection conn = new SqlConnection(DB_Helper.GetConnection()))
+            {
+                conn.Open();
+
+                SqlCommand com = new SqlCommand();
+                com.CommandText = "proc_Courses_PrintAll";
+                com.CommandType = CommandType.StoredProcedure;
+                com.Connection = conn;
+
+                SqlDataReader reader = com.ExecuteReader();
+                List<Courses> list = new List<Courses>();
+
+                while (reader.Read())
+                {
+                    Courses courses = new Courses();
+                    courses.ID = Convert.ToInt32(reader["ID"]);
+                    courses.Title = reader["Title"].ToString();
+                    courses.Credits = Convert.ToInt32(reader["Credits"]);
+                    courses.DepartmentID = Convert.ToInt32(reader["DepartmentID"]);
+                    courses.CreatedDate = Convert.ToDateTime(reader["CreatedDate"]);
+                    courses.CreatedBy = reader["CreatedBy"].ToString();
+                    courses.UpdatedDate = Convert.ToDateTime(reader["UpdatedDate"]);
+                    courses.UpdatedBy = reader["UpdatedBy"].ToString();
+                    list.Add(courses);
+                }
+                return list;
+            }
+        }
+
+        public void Delete(int id)
+        {
+            using (SqlConnection conn = new SqlConnection(DB_Helper.GetConnection()))
+            {
+                conn.Open();
+
+                SqlCommand com = new SqlCommand();
+                com.CommandText = "proc_Courses_Delete";
+                com.CommandType = CommandType.StoredProcedure;
+                com.Connection = conn;
+                com.Parameters.AddWithValue("@ID", id);
+
+                com.ExecuteNonQuery();
+            }
+        }
+
+        public void Update(Courses entity)
+        {
+            using (SqlConnection conn = new SqlConnection(DB_Helper.GetConnection()))
+            {
+                conn.Open();
+
+                SqlCommand com = new SqlCommand();
+                com.CommandText = "proc_Courses_Update";
+                com.CommandType = CommandType.StoredProcedure;
+                com.Connection = conn;
+
+                com.Parameters.AddWithValue("@ID", entity.ID);
+                com.Parameters.AddWithValue("@Title", entity.Title);
+                com.Parameters.AddWithValue("@Credits", entity.Credits);
+                com.Parameters.AddWithValue("@DepartmentID", entity.DepartmentID);
+                com.Parameters.AddWithValue("@CreatedDate", entity.CreatedDate);
+                com.Parameters.AddWithValue("@CreatedBy", entity.CreatedBy);
+                com.Parameters.AddWithValue("@UpdatedDate", entity.UpdatedDate);
+                com.Parameters.AddWithValue("@UpdatedBy", entity.UpdatedBy);
+
+                com.ExecuteNonQuery();
+            }
+        }
+    }
+}

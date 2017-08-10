@@ -1,0 +1,194 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Contoso.Models;
+using System.Data.SqlClient;
+using System.Data;
+
+namespace Contoso.Data
+{
+    public class PeopleRepository:IRepository<People>
+    {
+        public void Add(People entity)
+        {
+            using (SqlConnection conn = new SqlConnection(DB_Helper.GetConnection()))
+            {
+                conn.Open();
+
+                SqlCommand com = new SqlCommand();
+                com.CommandText = "proc_People_Add";
+                com.CommandType = CommandType.StoredProcedure;
+                com.Connection = conn;
+
+                com.Parameters.AddWithValue("@LastName", entity.LastName);
+                com.Parameters.AddWithValue("@FirstName", entity.FirstName);
+                com.Parameters.AddWithValue("@MiddleName", entity.MiddleName);
+                com.Parameters.AddWithValue("@Age", entity.Age);
+                com.Parameters.AddWithValue("@Email", entity.Email);
+                com.Parameters.AddWithValue("@Phone", entity.Phone);
+                com.Parameters.AddWithValue("@AddressLine1", entity.AddressLine1);
+                com.Parameters.AddWithValue("@AddressLine2", entity.AddressLine2);
+                com.Parameters.AddWithValue("@UnitOrApartmentNumber", entity.UnitOrApartmentNumber);
+                com.Parameters.AddWithValue("@City", entity.City);
+                com.Parameters.AddWithValue("@State", entity.State);
+                com.Parameters.AddWithValue("@ZipCode", entity.ZipCode);
+                com.Parameters.AddWithValue("@CreatedDate", entity.CreatedDate);
+                com.Parameters.AddWithValue("@CreatedBy", entity.CreatedBy);
+                com.Parameters.AddWithValue("@UpdatedDate", entity.UpdatedDate);
+                com.Parameters.AddWithValue("@UpdatedBy", entity.UpdatedBy);
+                com.Parameters.AddWithValue("@Password", entity.Password);
+                com.Parameters.AddWithValue("@Salt", entity.Salt);
+                com.Parameters.AddWithValue("@IsLocked", entity.IsLocked);
+                com.Parameters.AddWithValue("@LastLockedDateTime", entity.LastLockedDateTime);
+                com.Parameters.AddWithValue("@FailedAttempts", entity.FailedAttempts);
+
+                com.ExecuteNonQuery();
+            }
+        }
+
+        public People PrintOne(int id)
+        {
+            using (SqlConnection conn = new SqlConnection(DB_Helper.GetConnection()))
+            {
+                conn.Open();
+
+                SqlCommand com = new SqlCommand();
+                com.CommandText = "proc_People_PrintOne";
+                com.CommandType = CommandType.StoredProcedure;
+                com.Connection = conn;
+
+                com.Parameters.AddWithValue("ID", id);
+                SqlDataReader reader = com.ExecuteReader();
+                People people = new People();
+
+                while (reader.Read())
+                {
+                    people.ID = Convert.ToInt32(reader["ID"]);
+                    people.LastName = reader["LastName"].ToString();
+                    people.FirstName = reader["FirstName"].ToString();
+                    people.MiddleName = reader["MiddleName"].ToString();
+                    people.Age = Convert.ToInt32(reader["Age"]);
+                    people.Email = reader["Email"].ToString();
+                    people.Phone = reader["Phone"].ToString();
+                    people.AddressLine1 = reader["AddressLine1"].ToString();
+                    people.AddressLine2 = reader["AddressLine2"].ToString();
+                    people.UnitOrApartmentNumber = Convert.ToInt32(reader["UnitOrApartmentNumber"]);
+                    people.City = reader["City"].ToString();
+                    people.State = reader["State"].ToString();
+                    people.ZipCode = reader["ZipCode"].ToString();
+                    people.CreatedDate = Convert.ToDateTime(reader["CreatedDate"]);
+                    people.CreatedBy = reader["CreatedBy"].ToString();
+                    people.UpdatedDate = Convert.ToDateTime(reader["UpdatedDate"]);
+                    people.UpdatedBy = reader["UpdatedBy"].ToString();
+                    people.Password = reader["Password"].ToString();
+                    people.Salt = reader["Salt"].ToString();
+                    people.IsLocked = Convert.ToBoolean(reader["IsLocked"]);
+                    people.LastLockedDateTime = Convert.ToDateTime(reader["LastLockedDateTime"]);
+                    people.FailedAttempts = Convert.ToInt32(reader["FailedAttempts"]);
+                }
+                return people;
+            }
+        }
+
+        public List<People> PrintAll()
+        {
+            using (SqlConnection conn = new SqlConnection(DB_Helper.GetConnection()))
+            {
+                conn.Open();
+
+                SqlCommand com = new SqlCommand();
+                com.CommandText = "proc_People_PrintAll";
+                com.CommandType = CommandType.StoredProcedure;
+                com.Connection = conn;
+
+                SqlDataReader reader = com.ExecuteReader();
+                List<People> list = new List<People>();
+
+                while (reader.Read())
+                {
+                    People people = new People();
+                    people.ID = Convert.ToInt32(reader["ID"]);
+                    people.LastName = reader["LastName"].ToString();
+                    people.FirstName = reader["FirstName"].ToString();
+                    people.MiddleName = reader["MiddleName"].ToString();
+                    people.Age = Convert.ToInt32(reader["Age"]);
+                    people.Email = reader["Email"].ToString();
+                    people.Phone = reader["Phone"].ToString();
+                    people.AddressLine1 = reader["AddressLine1"].ToString();
+                    people.AddressLine2 = reader["AddressLine2"].ToString();
+                    people.UnitOrApartmentNumber = Convert.ToInt32(reader["UnitOrApartmentNumber"]);
+                    people.City = reader["City"].ToString();
+                    people.State = reader["State"].ToString();
+                    people.ZipCode = reader["ZipCode"].ToString();
+                    people.CreatedDate = Convert.ToDateTime(reader["CreatedDate"]);
+                    people.CreatedBy = reader["CreatedBy"].ToString();
+                    people.UpdatedDate = Convert.ToDateTime(reader["UpdatedDate"]);
+                    people.UpdatedBy = reader["UpdatedBy"].ToString();
+                    people.Password = reader["Password"].ToString();
+                    people.Salt = reader["Salt"].ToString();
+                    people.IsLocked = Convert.ToBoolean(reader["IsLocked"]);
+                    people.LastLockedDateTime = Convert.ToDateTime(reader["LastLockedDateTime"]);
+                    people.FailedAttempts = Convert.ToInt32(reader["FailedAttempts"]);
+                    list.Add(people);
+                }
+                return list;
+            }
+        }
+
+        public void Delete(int id)
+        {
+            using (SqlConnection conn = new SqlConnection(DB_Helper.GetConnection()))
+            {
+                conn.Open();
+
+                SqlCommand com = new SqlCommand();
+                com.CommandText = "proc_People_Delete";
+                com.CommandType = CommandType.StoredProcedure;
+                com.Connection = conn;
+                com.Parameters.AddWithValue("@ID", id);
+
+                com.ExecuteNonQuery();
+            }
+        }
+
+        public void Update(People entity)
+        {
+            SqlConnection conn = new SqlConnection(DB_Helper.GetConnection());
+            conn.Open();
+
+            SqlCommand com = new SqlCommand();
+            com.CommandText = "proc_People_Update";
+            com.CommandType = CommandType.StoredProcedure;
+            com.Connection = conn;
+
+            com.Parameters.AddWithValue("@ID", entity.ID);
+            com.Parameters.AddWithValue("@LastName", entity.LastName);
+            com.Parameters.AddWithValue("@FirstName", entity.FirstName);
+            com.Parameters.AddWithValue("@MiddleName", entity.MiddleName);
+            com.Parameters.AddWithValue("@Age", entity.Age);
+            com.Parameters.AddWithValue("@Email", entity.Email);
+            com.Parameters.AddWithValue("@Phone", entity.Phone);
+            com.Parameters.AddWithValue("@AddressLine1", entity.AddressLine1);
+            com.Parameters.AddWithValue("@AddressLine2", entity.AddressLine2);
+            com.Parameters.AddWithValue("@UnitOrApartmentNumber", entity.UnitOrApartmentNumber);
+            com.Parameters.AddWithValue("@City", entity.City);
+            com.Parameters.AddWithValue("@State", entity.State);
+            com.Parameters.AddWithValue("@ZipCode", entity.ZipCode);
+            com.Parameters.AddWithValue("@CreatedDate", entity.CreatedDate);
+            com.Parameters.AddWithValue("@CreatedBy", entity.CreatedBy);
+            com.Parameters.AddWithValue("@UpdatedDate", entity.UpdatedDate);
+            com.Parameters.AddWithValue("@UpdatedBy", entity.UpdatedBy);
+            com.Parameters.AddWithValue("@Password", entity.Password);
+            com.Parameters.AddWithValue("@Salt", entity.Salt);
+            com.Parameters.AddWithValue("@IsLocked", entity.IsLocked);
+            com.Parameters.AddWithValue("@LastLockedDateTime", entity.LastLockedDateTime);
+            com.Parameters.AddWithValue("@FailedAttempts", entity.FailedAttempts);
+
+            com.ExecuteNonQuery();
+            conn.Close();
+            conn.Dispose();
+        }
+    }
+}
