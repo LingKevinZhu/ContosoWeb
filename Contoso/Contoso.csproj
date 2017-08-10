@@ -133,7 +133,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Instructor\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
@@ -155,6 +154,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Instructor\AddInstructor.aspx" />
+    <Content Include="Instructor\DetailsInstructor.aspx" />
+    <Content Include="Instructor\ListInstructor.aspx" />
     <Content Include="People\AddPeople.aspx" />
     <Content Include="People\DetailsPeople.aspx" />
     <Content Include="People\ListPeople.aspx" />
@@ -275,6 +277,27 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Instructor\AddInstructor.aspx.cs">
+      <DependentUpon>AddInstructor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Instructor\AddInstructor.aspx.designer.cs">
+      <DependentUpon>AddInstructor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Instructor\DetailsInstructor.aspx.cs">
+      <DependentUpon>DetailsInstructor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Instructor\DetailsInstructor.aspx.designer.cs">
+      <DependentUpon>DetailsInstructor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Instructor\ListInstructor.aspx.cs">
+      <DependentUpon>ListInstructor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Instructor\ListInstructor.aspx.designer.cs">
+      <DependentUpon>ListInstructor.aspx</DependentUpon>
     </Compile>
     <Compile Include="People\AddPeople.aspx.cs">
       <DependentUpon>AddPeople.aspx</DependentUpon>

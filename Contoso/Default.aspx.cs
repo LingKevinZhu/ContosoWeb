@@ -11,7 +11,12 @@ namespace Contoso
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Session["FirstName"] = "Kevin";
+        }
 
+        protected void btnSumit_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Contact.aspx");
         }
     }
 }

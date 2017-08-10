@@ -7,18 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Contoso {
+namespace Contoso.Instructor {
     
     
-    public partial class _Default {
+    public partial class DetailsInstructor {
         
         /// <summary>
-        /// btnSumit control.
+        /// InstructorIDLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSumit;
+        protected global::System.Web.UI.WebControls.Label InstructorIDLabel;
+        
+        /// <summary>
+        /// HireDateLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label HireDateLabel;
     }
 }

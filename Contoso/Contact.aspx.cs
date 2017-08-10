@@ -11,7 +11,7 @@ namespace Contoso
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            lblName.Text = Session["FirstName"].ToString();
         }
     }
 }

@@ -46,6 +46,7 @@ namespace Contoso.Data
 
                 while (reader.Read())
                 {
+                    instructor.ID = Convert.ToInt32(reader["ID"]);
                     instructor.HireDate = Convert.ToDateTime(reader["HireDate"]);
                 }
                 return instructor;

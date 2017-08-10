@@ -81,6 +81,11 @@ namespace Contoso.Utility
             DepartmentsService departmentsService = new DepartmentsService();
             return departmentsService.GetAllDepartments();
         }
+        public static List<People> GetAllPeople()
+        {
+            PeopleService peopleService = new PeopleService();
+            return peopleService.GetAllPeople();
+        }
     }
     public class State
     {

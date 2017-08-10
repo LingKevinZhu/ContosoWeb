@@ -35,11 +35,10 @@ namespace Contoso.Service
             Instructor obj = instructorRepository.PrintOne(id);
             instructorRepository.Delete(obj);
         }
-        public void UpdateInstructor(int id)
+        public void UpdateInstructor(Instructor entity)
         {
             InstructorRepository instructorRepository = new InstructorRepository();
-            Instructor obj = instructorRepository.PrintOne(id);
-            instructorRepository.Update(obj);
+            instructorRepository.Update(entity);
         }
     }
 }

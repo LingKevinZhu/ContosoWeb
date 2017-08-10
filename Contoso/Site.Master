@@ -57,6 +57,7 @@
                         <li><a runat="server" href="~/People/ListPeople.aspx">People</a></li>
                         <li><a runat="server" href="~/Departments/ListDepartments.aspx">Departments</a></li>
                         <li><a runat="server" href="~/Courses/ListCourses.aspx">Courses</a></li>
+                        <li><a runat="server" href="~/Instructor/ListInstructor.aspx">Instructor</a></li>
                     </ul>
                 </div>
             </div>
