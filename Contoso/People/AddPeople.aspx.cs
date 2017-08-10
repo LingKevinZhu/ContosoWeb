@@ -48,7 +48,7 @@ namespace Contoso.People
                 txtUpdatedDate.Text = people.UpdatedDate.ToString();
                 txtUpdatedBy.Text = people.UpdatedBy.Trim();
                 txtPassword.Text = people.Password.Trim();
-                txtSalt.Text = people.Salt.Trim();
+                txtSalt.Text = people.Salt.Trim();   
                 if (people.IsLocked == true) ddlIsLocked.SelectedValue = "Yes";
                 if (people.IsLocked == false) ddlIsLocked.SelectedValue = "No";
                 txtLastLockedDateTime.Text = people.LastLockedDateTime.ToString();
