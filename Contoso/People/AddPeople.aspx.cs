@@ -51,7 +51,7 @@ namespace Contoso.People
                 txtSalt.Text = people.Salt.Trim();   
                 if (people.IsLocked == true) ddlIsLocked.SelectedValue = "Yes";
                 if (people.IsLocked == false) ddlIsLocked.SelectedValue = "No";
-                txtLastLockedDateTime.Text = people.LastLockedDateTime.ToString();
+                txtLastLockedDateTime.Text = people.LastLockedDateTime.ToString();//Second Version
                 txtFailedAttempts.Text = people.FailedAttempts.ToString();
             }
         }
